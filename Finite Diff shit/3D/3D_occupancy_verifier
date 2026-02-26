@@ -1,0 +1,25 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Load grid
+occ = np.load(r"C:\Users\antho\Finite Diff shit\3D\voxel_occupancy.npy")
+
+input_x = np.arange(18, 22)
+input_y = np.arange(217, 246)
+input_z = np.arange(150, 161)
+
+for x in input_x:
+  for y in input_y:
+    for z in input_z:
+      occ[x,y,z] +=2
+
+# Basic info
+print("Shape:", occ.shape)          # e.g. (108, 372, 159)
+print("Unique values:", np.unique(occ))  # should show [0, 1]
+print("Occupied voxels:", np.sum(occ))   # count of 1’s
+print("Empty voxels:", np.prod(occ.shape) - np.sum(occ))
+
+# Quick slice visualization
+plt.imshow(occ[:, :, 152])  # plot middle slice along z
+plt.title("Middle Z slice of occupancy")
+plt.show()
